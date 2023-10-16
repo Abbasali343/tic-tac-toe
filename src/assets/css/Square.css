@@ -1,0 +1,33 @@
+.square{
+    width: 266.6px;
+    height: 167px;
+    color: #fff;
+    background-color: #252830;
+    border: 1px solid #206e94;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    text-align: center;
+}
+.square1{
+    width: 160px;
+    height: 100px;
+    color: #fff;
+    background-color: #252830;
+    border: 1px solid #206e94;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    text-align: center;
+}
+.square2{
+    width: 114.2px;
+    height: 71px;
+    color: #fff;
+    background-color: #252830;
+    border: 1px solid #206e94;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    text-align: center;
+}
