@@ -2,12 +2,15 @@
     width: 1278px;
     height: 642px;
     margin: -8px;
-    background-color: #252830;
+    background-color: #fff;
     display: flex;
 }
 .Game_Heading{
-    color: white;
-    transform: translate(70px,110px);
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 48px;
+    color: #4d6a87;
+    transform: translate(130px,80px);
 }
 span{
     margin-left: 50px;

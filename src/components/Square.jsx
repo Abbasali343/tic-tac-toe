@@ -6,6 +6,7 @@ export default function Square({ value, index, onSelect, table }) {
   return (
     <>
       <button
+      id={text==='X' ? 'player':text==='O'?'ai':'null'}
         className={
           table === '3'
             ? "square"

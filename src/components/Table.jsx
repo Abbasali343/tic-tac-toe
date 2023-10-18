@@ -17,6 +17,8 @@ function Table({ table, playerName, difficultyLevel }) {
   const [board, setBoard] = useState(Array(boardLength).fill(null));
   const [isX, setIsX] = useState(true);
 
+  // check whether anyone win or game is draw or continue
+
   const winner = checkWinner(board, table);
   const draw = checkDraw(board);
 
@@ -32,60 +34,6 @@ function Table({ table, playerName, difficultyLevel }) {
     status = `${playerName} will start`;
   }
 
-  //function to determine the Ai's move
-
-  //   function minimax(newBoard, player) {
-  //     const availableSpots = checkFreeSquares(newBoard);
-  //     if (checkWinner(newBoard, table) === humanPlayer) {
-  //       return { score: -10 };
-  //     } else if (checkWinner(newBoard, table) === aiPlayer) {
-  //       return { score: 10 };
-  //     } else if (availableSpots.length === 0) {
-  //       return { score: 0 };
-  //     }
-
-  //     let moves = [];
-
-  //     for (let i = 0; i < availableSpots.length; i++) {
-  //       let move = {};
-  //       move.index = availableSpots[i];
-  //       newBoard[availableSpots[i]] = player;
-
-  //       if (player === aiPlayer) {
-  //         let result = minimax(newBoard, humanPlayer);
-  //         if (result) {
-  //           move.score = result.score;
-  //         }
-  //       } else {
-  //         let result = minimax(newBoard, aiPlayer);
-  //         if (result) {
-  //           move.score = result.score;
-  //         }
-  //       }
-  //       newBoard[availableSpots[i]] = null;
-  //       moves.push(move);
-  //     }
-
-  //     let bestMove;
-  //     if (player === aiPlayer) {
-  //       let bestScore = -10000;
-  //       for (let i = 0; i < moves.length; i++) {
-  //         if (moves[i].score > bestScore) {
-  //           bestScore = moves[i].score;
-  //           bestMove = i;
-  //         }
-  //       }
-  //     } else {
-  //       let bestScore = 10000;
-  //       for (let i = 0; i < moves.length; i++) {
-  //         if (moves[i].score < bestScore) {
-  //           bestScore = moves[i].score;
-  //           bestMove = i;
-  //         }
-  //       }
-  //     }
-  //     return moves[bestMove];
-  //   }
 
   // function to determine player's move
 
@@ -135,7 +83,6 @@ function Table({ table, playerName, difficultyLevel }) {
             />
           ))}
         </div>
-        <p>{status}</p>
       </div>
     </>
   );

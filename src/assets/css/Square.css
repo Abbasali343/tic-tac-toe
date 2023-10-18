@@ -1,33 +1,42 @@
 .square{
-    width: 266.6px;
-    height: 167px;
-    color: #fff;
-    background-color: #252830;
-    border: 1px solid #206e94;
+    width: 176.6px;
+    height: 183.3px;
+    
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
     font-weight: bold;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 18px;
+    font-size: 62px;
     text-align: center;
 }
-.square1{
-    width: 160px;
-    height: 100px;
+#player{
+    color: #3989d4;
+}
+#ai{
+    color: #3abdd4;
+}
+#null{
     color: #fff;
-    background-color: #252830;
-    border: 1px solid #206e94;
+}
+.square1{
+    width: 106px;
+    height: 110px;
+    color: #fff;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
     font-weight: bold;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 18px;
+    font-size: 36px;
     text-align: center;
 }
 .square2{
-    width: 114.2px;
-    height: 71px;
+    width: 75.6px;
+    height: 79px;
     color: #fff;
-    background-color: #252830;
-    border: 1px solid #206e94;
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
     font-weight: bold;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 18px;
+    font-size: 24px;
     text-align: center;
 }

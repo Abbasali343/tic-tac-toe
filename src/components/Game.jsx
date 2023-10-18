@@ -1,13 +1,5 @@
-import { useActionData, useLocation } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import TableWith3 from "./TableWith3";
-import TableWith5 from "./TableWith5";
-import TableWith7 from "./TableWith7";
-
+import { useLocation } from "react-router-dom";
 import "../assets/css/game.css";
-import { useState } from "react";
 import Table from "./Table";
 
 const Game = () => {
