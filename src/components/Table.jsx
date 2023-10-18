@@ -7,6 +7,7 @@ import {
   checkFreeSquares,
   findEasyAiMove,
   findMediumMove,
+  findHardMove,
   humanPlayer,
   aiPlayer,
 } from "./Functions/Handlers";
@@ -99,12 +100,13 @@ function Table({ table, playerName, difficultyLevel }) {
       return;
     }
 
-    // const bestMove = findEasyAiMove(board);
     const bestMove =
       difficultyLevel === "low"
         ? findEasyAiMove(board)
-        : findMediumMove(board, table);
-
+        : difficultyLevel === "medium"
+        ? findMediumMove(board, table)
+        : findHardMove(board, table);
+    console.log(bestMove);
     AiMove(bestMove);
   }
 

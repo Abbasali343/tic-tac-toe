@@ -23,46 +23,6 @@ export function checkWinner(board, table) {
   return null;
 }
 
-// function to make pattern to compare with winning patterns
-
-function makePattern(player, depth, table) {
-  let values = [];
-  for (let i = 0; i < table; i++) {
-    values.push(player);
-  }
-  if (depth === 3) {
-    return values;
-  } else {
-    values.pop();
-    values.push(null);
-    return values;
-  }
-}
-
-// function to make the winning patterns and make patterns
-
-function checkPatterns(player, depth, table, board) {
-  let finalResult = [];
-  let values = makePattern(player, depth, table);
-  const winningPatterns = generateWinningPatterns(table);
-  const filteredPatterns = winningPatterns.filter((squareIndexes) => {
-    const squareValues = squareIndexes.map((index) => board[index]);
-    const result =
-      JSON.stringify(values.sort()) === JSON.stringify(squareValues.sort());
-    if (result) {
-      finalResult.push({
-        result,
-        squareIndexes,
-      });
-    }
-  });
-  if (filteredPatterns.length > 0) {
-    return finalResult;
-  } else {
-    return finalResult[0];
-  }
-}
-
 // function to check if the game is draw
 
 export function checkDraw(board) {
@@ -99,14 +59,10 @@ export function findEasyAiMove(board) {
 // function to find Ai Move for Medium Level Difficulty
 
 export function findMediumMove(board, table) {
-  const winIndex = checkPatterns(humanPlayer, 2, table, board);
-  if (winIndex !== undefined) {
-    const length = winIndex.squareIndexes.length;
-    for (let i = 0; i < length; i++) {
-      if (board[winIndex.squareIndexes[i]] === null) {
-        return winIndex.squareIndexes[i];
-      }
-    }
+  const humanWinIndex = humanWinningMove(humanPlayer, 2, table, board);
+
+  if (humanWinIndex) {
+    return humanWinIndex;
   }
 
   const emptySquares = checkFreeSquares(board);
@@ -115,6 +71,97 @@ export function findMediumMove(board, table) {
     emptySquares[Math.ceil(Math.random() * emptySquares.length)];
 
   return randomMove;
+}
+
+// function to find Ai Move for Hard Level Difficulty
+
+export function findHardMove(board, table) {
+  const blockHuman = humanBlockMove(humanPlayer, 1, table, board);
+  const aiWinIndex = aiWinningMove(aiPlayer, 2, table, board);
+  const humanWinIndex = humanWinningMove(humanPlayer, 2, table, board);
+
+  if (aiWinIndex !== undefined) {
+    return aiWinIndex;
+  } else if (humanWinIndex !== undefined) {
+    return humanWinIndex;
+  } else if (blockHuman !== undefined) {
+    return blockHuman;
+  }
+}
+
+// function to make pattern to compare with winning patterns
+
+function makePattern(player, depth, table) {
+  let values = [];
+  for (let i = 0; i < table; i++) {
+    values.push(player);
+  }
+  if (depth === 3) {
+    return values;
+  } else {
+    values.pop();
+    values.push(null);
+    return values;
+  }
+}
+
+// function to make hard level pattern to compare with winning patterns
+
+function makeContinuePattern(player, depth, table) {
+  let values = [];
+  for (let i = 0; i < table; i++) {
+    values.push(player);
+  }
+  for (let i = depth; i < values.length; i++) {
+    values[i] = null;
+  }
+
+  return values;
+}
+
+// function to make the winning patterns and make patterns
+
+function checkHardPatterns(player, depth, table, board) {
+  let finalResult = [];
+  const values = makeContinuePattern(player, depth, table);
+  const winningPatterns = generateWinningPatterns(table);
+  const filteredPatterns = winningPatterns.filter((squareIndexes) => {
+    const squareValues = squareIndexes.map((index) => board[index]);
+    const result =
+      JSON.stringify(values.sort()) === JSON.stringify(squareValues.sort());
+    if (result) {
+      finalResult.push({
+        squareIndexes,
+      });
+    }
+  });
+  return finalResult;
+}
+
+// function for pattern's comparison between winning and the comparison patterns
+
+function checkPatterns(player, depth, table, board) {
+  let finalResult = [];
+
+  let values = makePattern(player, depth, table);
+  const winningPatterns = generateWinningPatterns(table);
+  const filteredPatterns = winningPatterns.filter((squareIndexes) => {
+    const squareValues = squareIndexes.map((index) => board[index]);
+    const result =
+      JSON.stringify(values.sort()) === JSON.stringify(squareValues.sort());
+    if (result) {
+      finalResult.push({
+        result,
+        squareIndexes,
+      });
+    }
+  });
+
+  if (filteredPatterns.length > 0) {
+    return finalResult;
+  } else {
+    return finalResult[0];
+  }
 }
 
 //function used for the making of winning patterns according the table length
@@ -150,4 +197,57 @@ function generateWinningPatterns(boardSize) {
   patterns.push(diagonal1, diagonal2);
 
   return patterns;
+}
+
+// function to check whether the human is about to win
+
+function humanWinningMove(humanPlayer, depth, table, board) {
+  const winIndex = checkPatterns(humanPlayer, depth, table, board);
+  if (winIndex !== undefined) {
+    const length = winIndex.squareIndexes.length;
+    for (let i = 0; i < length; i++) {
+      if (board[winIndex.squareIndexes[i]] === null) {
+        return winIndex.squareIndexes[i];
+      }
+    }
+  }
+}
+
+// function to check whether the ai is about to win
+
+function aiWinningMove(aiPlayer, depth, table, board) {
+  const loseIndex = checkPatterns(aiPlayer, depth, table, board);
+  if (loseIndex !== undefined) {
+    const length = loseIndex.squareIndexes.length;
+    for (let i = 0; i < length; i++) {
+      if (board[loseIndex.squareIndexes[i]] === null) {
+        return loseIndex.squareIndexes[i];
+      }
+    }
+  }
+}
+
+// function to start blocking human on its first attempt
+
+function humanBlockMove(humanPlayer, depth, table, board) {
+  const continueLines = checkHardPatterns(humanPlayer, depth, table, board);
+  if (continueLines !== undefined) {
+    const randomMove =
+      continueLines[Math.floor(Math.random() * continueLines.length)];
+
+    if (randomMove !== undefined) {
+      const firstBlock = randomMove.squareIndexes;
+      let freeIndexes = [];
+      for (let i = 0; i < firstBlock.length; i++) {
+        if (board[firstBlock[i]] === null) {
+          freeIndexes.push(firstBlock[i]);
+        }
+      }
+
+      const randomIndex =
+        freeIndexes[Math.floor(Math.random() * freeIndexes.length)];
+
+      return randomIndex;
+    }
+  }
 }
