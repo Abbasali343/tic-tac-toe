@@ -14,9 +14,10 @@ const Game = () => {
   const location = useLocation();
   const options = location.state;
 
+  const difficultyLevel = options.difficultyLevel;
   const table = options.table;
   const playerName = options.playerName;
-//   const [table,setTable] = useState(options);
+  //   const [table,setTable] = useState(options);
 
   return (
     <>
@@ -28,7 +29,11 @@ const Game = () => {
           <br />
           Computer
         </h1>
-        <Table table={table} playerName={playerName}  />
+        <Table
+          table={table}
+          playerName={playerName}
+          difficultyLevel={difficultyLevel}
+        />
       </div>
     </>
   );
