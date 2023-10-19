@@ -6,6 +6,7 @@
   position: absolute;
   left: 580px;
   top: 40px;
+  z-index: 1;
 }
 .grid_container {
   width: 530px;

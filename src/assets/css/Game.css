@@ -4,6 +4,42 @@
     margin: -8px;
     background-color: #fff;
     display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+.header{
+    width: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    transform: translate(90px,40px);
+}
+.player-header{
+    display: flex;
+}
+.ai-header{
+    display: flex;
+}
+.text{
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 36px;
+    color: #4d6a87;
+}
+.symbol-player{
+    margin-left: 15px;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 36px;
+    color: #3989d4;
+}
+.symbol-ai{
+    margin-left: 15px;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 36px;
+    color: #3abdd4;
 }
 .Game_Heading{
     font-weight: bold;

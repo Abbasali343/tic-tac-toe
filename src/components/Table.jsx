@@ -1,4 +1,5 @@
 import { useState } from "react";
+import StatusModal from "./StatusModal";
 import Square from "./Square";
 import "../assets/css/Table.css";
 import {
@@ -12,9 +13,8 @@ import {
   aiPlayer,
 } from "./Functions/Handlers";
 
-function Table({ table, playerName, difficultyLevel }) {
-  const boardLength = table * table;
-  const [board, setBoard] = useState(Array(boardLength).fill(null));
+function Table({ boardLength, table, difficultyLevel }) {
+  const [board, setBoard] = useState(boardLength);
   const [isX, setIsX] = useState(true);
 
   // check whether anyone win or game is draw or continue
@@ -22,18 +22,15 @@ function Table({ table, playerName, difficultyLevel }) {
   const winner = checkWinner(board, table);
   const draw = checkDraw(board);
 
-  let status;
+  let status = "";
 
   if (winner === humanPlayer) {
-    status = `Winner is : ${playerName}`;
+    status = "You Win";
   } else if (winner === aiPlayer) {
-    status = `Winner is : Computer`;
+    status = "You Lose";
   } else if (draw) {
-    status = `Game is Draw`;
-  } else {
-    status = `${playerName} will start`;
+    status = "Game is Draw";
   }
-
 
   // function to determine player's move
 
@@ -54,7 +51,6 @@ function Table({ table, playerName, difficultyLevel }) {
         : difficultyLevel === "medium"
         ? findMediumMove(board, table)
         : findHardMove(board, table);
-    console.log(bestMove);
     AiMove(bestMove);
   }
 
@@ -69,9 +65,20 @@ function Table({ table, playerName, difficultyLevel }) {
     setIsX(!isX);
   }
 
+  // function to restart the game
+
+  function handleRestart() {
+    status = "";
+    setIsX(true);
+    setBoard(Array(table * table).fill(null));
+  }
+
   return (
     <>
       <div className="sub_container">
+        {status !== "" ? (
+          <StatusModal status={status} closeModal={handleRestart} />
+        ) : null}
         <div className="grid_container">
           {board.map((squares, index) => (
             <Square
