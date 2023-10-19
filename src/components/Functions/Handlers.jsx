@@ -52,7 +52,7 @@ export function findEasyAiMove(board) {
   const emptySquares = checkFreeSquares(board);
 
   const randomMove =
-    emptySquares[Math.ceil(Math.random() * emptySquares.length)];
+    emptySquares[Math.floor(Math.random() * emptySquares.length)];
   return randomMove;
 }
 
@@ -68,7 +68,7 @@ export function findMediumMove(board, table) {
   const emptySquares = checkFreeSquares(board);
 
   const randomMove =
-    emptySquares[Math.ceil(Math.random() * emptySquares.length)];
+    emptySquares[Math.floor(Math.random() * emptySquares.length)];
 
   return randomMove;
 }
@@ -87,6 +87,12 @@ export function findHardMove(board, table) {
   } else if (blockHuman !== undefined) {
     return blockHuman;
   }
+
+  const emptySquares = checkFreeSquares(board);
+
+  const randomMove =
+    emptySquares[Math.floor(Math.random() * emptySquares.length)];
+  return randomMove;
 }
 
 // function to make pattern to compare with winning patterns

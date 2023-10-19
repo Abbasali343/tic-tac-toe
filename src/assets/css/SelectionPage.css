@@ -1,23 +1,25 @@
 .selection_container {
   width: 400px;
   height: 500px;
-  border: 2.5px solid rgba(9, 9, 121, 1);
+  border: 1px solid #caebf3;
+  box-shadow: 0 6px 20px 0 #caebf3;
   position: absolute;
   left: 400px;
   top: 80px;
 }
 .userName{
-  color: rgba(9, 9, 121, 1);
+  color: #4d6a87;
   margin-left: 70px;
 }
 .selection_heading {
   font-size: 22px;
-  color: rgba(9, 9, 121, 1);
+  color: #4d6a87;
   transform: translate(140px, 30px);
 }
 .option_selector {
   display: flex;
   justify-content: space-evenly;
+  color: #3abdd4;
   transform: translate(0, 50px);
   margin-bottom: 70px;
 }
@@ -25,7 +27,7 @@
   width: 120px;
   height: 40px;
   background-color: #fff;
-  border: 4px solid rgba(9,9,121,1);
+  border: 4px solid #3989d4;
   border-radius: 5px;
   transform: translate(140px,70px);
 }
